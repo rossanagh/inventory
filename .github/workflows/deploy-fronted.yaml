@@ -36,13 +36,12 @@ jobs:
         run: npm ci
 
       - name: Build (prod)
-        run: |
-          npm run build -- --configuration production --base-href /inventory/
+        run: npm run build -- --configuration production --base-href /inventory/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/inventory
+          path: dist/inventory   # <- din angular.json
 
   deploy:
     needs: build
