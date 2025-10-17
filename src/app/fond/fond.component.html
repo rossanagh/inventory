@@ -1,0 +1,42 @@
+<!-- Buton de adăugare fond -->
+<div style="margin: 10px 0;"  *ngIf="auth.isLoggedIn()">
+  <button (click)="openAddFondPopup()">Adaugă fond</button>
+</div>
+
+<!-- POPUP pentru adăugare fond -->
+<div class="popup-backdrop" *ngIf="showAddFondPopup">
+  <div class="popup">
+    <h3>Adaugă Fond Nou</h3>
+    
+    <label for="nume">Nume fond:</label>
+    <input id="nume" type="text" [(ngModel)]="newFond.nume" placeholder="Introdu numele fondului" />
+
+    <div class="popup-actions">
+      <button (click)="confirmAddFond()">Salvează</button>
+      <button (click)="closeAddFondPopup()">Anulează</button>
+    </div>
+  </div>
+</div>
+
+<!-- Listă de fonduri paginate (rămâne la fel) -->
+<div class="fond-list">
+  <table>
+    <thead>
+      <tr>
+        <th>Nume Fond</th>
+        <th>Acțiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fond of paginatedFonduri">
+        <td>{{ fond.nume }}</td>
+        <td class="fond-actions">
+          <button class="details-btn" [routerLink]="['/compartimente', fond.id]">Detalii</button>
+        </td>
+      </tr>
+      <tr *ngIf="paginatedFonduri.length === 0">
+        <td colspan="2" style="text-align:center; padding: 12px;">Niciun fond găsit.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

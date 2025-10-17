@@ -1,0 +1,91 @@
+<!-- Căutare -->
+<div class="search-container">
+  <i class="fas fa-search search-icon"></i>
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (ngModelChange)="onSearchChange()"
+    placeholder="Caută inventar..."
+    class="search-input"
+  />
+</div>
+
+<!-- Buton Adăugare inventar -->
+<div style="margin: 10px 0;" *ngIf="auth.isLoggedIn()">
+  <button (click)="openAddInventarPopup()">Adaugă inventar</button>
+</div>
+
+<!-- POPUP Adăugare inventar -->
+<div class="popup-backdrop" *ngIf="showAddInventarPopup" >
+  <div class="popup">
+    <h3>Adaugă Inventar</h3>
+
+    <label for="anInput">An:</label>
+    <input
+      id="anInput"
+      type="number"
+      [(ngModel)]="newInventar.an"
+      placeholder="Ex: 2025"
+    />
+
+    <label for="pastrareInput" style="margin-top:10px;">Timp păstrare:</label>
+    <input
+      id="pastrareInput"
+      type="text"
+      [(ngModel)]="newInventar.pastrare"
+      placeholder="Ex: permanent / 10 ani"
+    />
+
+    <label for="compSelect" style="margin-top:10px;">Compartiment:</label>
+    <select
+      id="compSelect"
+      [(ngModel)]="selectedCompartimentIdForNew"
+    >
+      <option [ngValue]="null" disabled>— selectează compartiment —</option>
+      <option *ngFor="let c of compartimente" [ngValue]="c.id">
+        {{ c.nume }}
+      </option>
+    </select>
+
+    <div class="popup-actions">
+      <button (click)="confirmAddInventar()">Salvează</button>
+      <button (click)="closeAddInventarPopup()">Anulează</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lista inventare -->
+<div class="inventar-list">
+  <table>
+    <thead>
+      <tr>
+        <th>An</th>
+        <th>Compartiment</th>
+        <th>Număr Dosare</th>
+        <th>Timp păstrare</th>
+        <th>Acțiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inventar of paginatedInventare">
+        <td>{{ inventar.an }}</td>
+        <td>{{ inventar.compartiment?.nume }}</td>
+        <td>{{ inventar.id ? (dosareCountMap[inventar.id] || 0) : 0 }}</td>
+        <td>{{ inventar.pastrare }}</td>
+        <td class="inventar-actions">
+          <button class="details-btn" [routerLink]="['/dosare', inventar.id]">Detalii</button>
+        </td>
+      </tr>
+      <tr *ngIf="paginatedInventare.length === 0">
+        <td colspan="5" style="text-align:center; padding: 12px;">Niciun inventar găsit.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Paginare -->
+<div style="margin-top: 10px;">
+  <button (click)="previousInventarPage()" [disabled]="invCurrentPage === 1">«</button>
+  Pagina {{ invCurrentPage }} din {{ invTotalPages }}
+  <button (click)="nextInventarPage()" [disabled]="invCurrentPage === invTotalPages">»</button>
+</div>

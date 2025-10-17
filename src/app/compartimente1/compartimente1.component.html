@@ -1,0 +1,60 @@
+<div class="compartiment-container">
+    <h3 class="title">Compartimente</h3>
+    <div *ngIf="selectedCompartiment">
+    
+      <p><strong>Fond asociat:</strong> {{ fondNume }}</p>
+    </div>
+    <!-- Formular pentru adăugarea unui compartiment nou -->
+    <form  (ngSubmit)="addCompartiment()" class="compartiment-form">
+      <input
+        type="text"
+        id="nume"
+        [(ngModel)]="newCompartiment.nume"
+        name="nume"
+        placeholder="Nume compartiment"
+        required
+        class="input-field"
+      />
+  
+      <select id="fond" [(ngModel)]="newCompartiment.fond" name="fond" required class="select-field">
+        <option value="" disabled selected hidden>Fond...</option> <!-- Placeholder -->
+        <option *ngFor="let fond of fonduri" [ngValue]="fond">{{ fond.nume }}</option>
+      </select>
+      
+  
+      <button type="submit" class="btn add-btn">Adaugă Compartiment</button>
+    </form>
+    <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Caută compartiment..."
+          class="search-input"
+        />
+      </div>
+      
+  
+      <div class="compartiment-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nume Compartiment</th>
+                    <th>Fond Asociat</th>
+                    <th>Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let compartiment of compartimente">
+                    <td>{{ compartiment.nume }}</td>
+                    <td>{{ compartiment.fond?.nume }}</td>
+                    <td class="compartiment-actions">
+                        <button class="btn edit-btn" (click)="editCompartiment(compartiment)">Editează</button>
+                        <button *ngIf="compartiment.id" (click)="deleteCompartiment(compartiment.id)">Șterge</button>
+                        <button [routerLink]="['/inventar']" class="details-btn">Detalii</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

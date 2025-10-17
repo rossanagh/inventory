@@ -1,1 +1,142 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #333;
+    padding: 10px;
+  }
+  
+  nav {
+    background-color: #1976d2;
+    padding: 10px 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  nav a.active {
+    text-decoration: underline;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #1976d2;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 8px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #1976d2;
+    color: white;
+    padding: 8px 16px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #125ca1;
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f1f1f1;
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* ========= Stil pentru Tabele ========= */
+/* ========= Stil pentru Tabele cu fundal contrastant ========= */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f8fafc;             /* fundal gri foarte deschis (mai odihnitor decât alb pur) */
+  border: 1px solid #cbd5e1;       /* gri-300 */
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+thead th {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #ffffff;                  /* gri-900 */
+  background:  #348feb;             /* gri-200 */
+  border-bottom: 2px solid #cbd5e1;
+  padding: 12px 14px;
+  letter-spacing: .2px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Celule */
+tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #cbd5e1;
+  color: #1e293b;                  /* gri-900 */
+  vertical-align: middle;
+}
+
+/* Rânduri alternate cu griuri mai închise */
+tbody tr:nth-child(odd) {
+  background: #f1f5f9;             /* gri-100 */
+}
+tbody tr:nth-child(even) {
+  background: #e2e8f0;             /* gri-200 */
+}
+
+/* Hover mai vizibil */
+tbody tr:hover {
+  background: #cbd5e1;             /* gri-300 */
+}
+
+/* Ultimul rând fără border */
+tbody tr:last-child td {
+  border-bottom: none;
+}

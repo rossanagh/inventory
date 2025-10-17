@@ -1,0 +1,144 @@
+
+
+
+
+
+
+<!-- Căutare dosare -->
+<div class="search-container" style="margin: 8px 0 12px;">
+  <input
+    type="text"
+    [(ngModel)]="searchTextDosar"
+    (ngModelChange)="onDosarSearchChange()"
+    placeholder="Caută dosar (indicativ, conținut, date, cutie...)"
+    class="search-input"
+   
+  />
+</div>
+
+
+<!-- Tabel cu paginare -->
+<table>
+  <thead>
+    <tr>
+      <th>Nr. crt.</th>
+      <th>Indicativ</th>
+      <th>Conținut</th>
+      <th>Date extreme</th>
+      <th>Nr. File</th>
+      <th>Observații</th>
+      <th>Cutie</th>
+      <!-- <th>Acțiuni</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of paginatedDosare">
+      <td>{{ d.numarCriteriu }}</td>
+      <td>{{ d.indicativNomenclator }}</td>
+      <td>{{ d.continut }}</td>
+      <td>{{ d.dataEnd }}</td>
+      <td>{{ d.numarFile }}</td>
+      <td>{{ d.observatii }}</td>
+      <td>{{ d.cutie }}</td>
+    </tr>
+    <tr *ngIf="paginatedDosare.length === 0">
+      <td colspan="7" style="text-align:center;padding:12px;">Niciun dosar găsit.</td>
+    </tr>
+  </tbody>  
+</table>
+
+<!-- Butoane de paginare -->
+<div style="margin-top: 10px;">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">«</button>
+  Pagina {{ currentPage }} din {{ totalPages }}
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">»</button>
+</div>
+<br *ngIf="auth.isLoggedIn()">
+<div style="display: flex; gap: 10px; margin-top: 10px;" *ngIf="auth.isLoggedIn()">
+  <button (click)="exportToExcel()" style="background-color: green;">Exportă Excel</button>
+  
+  <label class="btn  btn-danger" style="background-color:red;color: white;height: 15px;margin-top: 13px;" *ngIf="auth.isLoggedIn()">
+    Importă  Excel
+    <input type="file" (change)="onFileSelected($event)" hidden accept=".xlsx, .xls" />
+  </label>
+</div>
+<div class="space" style="height: 50px;"></div>
+
+<hr class="header-divider" />
+<br>
+<h3 *ngIf="auth.isLoggedIn()">Adaugă dosar manual</h3>
+<form (ngSubmit)="addDosar()" class="dosar-form-grid" *ngIf="auth.isLoggedIn()">
+  <!-- 7. Numar Criteriu -->
+<div>
+  <label for="numarCriteriu">Număr Criteriu</label>
+  <input id="numarCriteriu" name="numarCriteriu"
+         [(ngModel)]="newDosar.numarCriteriu" placeholder="ex: 12" />
+</div>
+
+  <!-- 1. Indicativ -->
+  <div>
+    <label for="indicativ">Indicativ</label>
+    <input id="indicativ" name="indicativ"
+           [(ngModel)]="newDosar.indicativNomenclator" placeholder="ex: 1234-AB" required />
+  </div>
+
+  <!-- 2. Conținut -->
+  <div>
+    <label for="continut">Conținut</label>
+    <input id="continut" name="continut"
+           [(ngModel)]="newDosar.continut" placeholder="ex: Documente arhivă" required />
+  </div>
+
+  <!-- 3. Date extreme (string, nu date picker) -->
+  <div>
+    <label for="dataEnd">Date extreme</label>
+    <input id="dataEnd" name="dataEnd"
+           [(ngModel)]="newDosar.dataEnd" placeholder="ex: 2004-12-31" />
+  </div>
+
+  <!-- 4. Nr. File (string) -->
+  <div>
+    <label for="numarFile">Nr. File</label>
+    <input id="numarFile" name="numarFile"
+           [(ngModel)]="newDosar.numarFile" placeholder="ex: 3" />
+  </div>
+
+  <!-- 5. Observații -->
+  <div>
+    <label for="observatii">Observații</label>
+    <input id="observatii" name="observatii"
+           [(ngModel)]="newDosar.observatii" placeholder="ex: lipsă copertă" />
+  </div>
+
+  <!-- 6. Cutie -->
+  <div>
+    <label for="cutie">Cutie</label>
+    <input id="cutie" name="cutie"
+           [(ngModel)]="newDosar.cutie" placeholder="ex: 2" />
+  </div>
+
+  <!-- Inventar (separat, nu e în tabel dar e necesar) -->
+<!-- În formularul de jos, șterge blocul <select ...> pentru inventar și pune: -->
+  <div style="grid-column: span 1;">
+    <label>Inventar curent</label>
+    <div style="padding:8px;border:1px solid #ddd;border-radius:4px;background:#fafafa">
+      {{ inventarAn || '—' }}
+    </div>
+  </div>
+  
+
+  <div style="grid-column: span 4;">
+    <button type="submit">Adaugă Dosar</button>
+  </div>
+</form>
+
+<!-- stilizare mică -->
+<style>
+  .dosar-form-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:25px;margin-bottom:20px
+  }
+  .dosar-form-grid label{display:block;margin-bottom:4px;font-weight:600}
+  .dosar-form-grid input,.dosar-form-grid select{width:100%;padding:8px}
+</style>
+
+<br><br><br>

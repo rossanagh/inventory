@@ -1,0 +1,44 @@
+.cutie-container {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.cutie-form {
+  margin-bottom: 20px;
+}
+
+.input-field,
+.select-field {
+  margin: 10px;
+  padding: 8px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.add-btn {
+  background-color: #008CBA;
+}
+
+.cutie-list {
+  margin-top: 20px;
+}
+
+.cutie-item {
+  margin-bottom: 10px;
+}
+
+.cutie-actions button {
+  margin-left: 10px;
+}

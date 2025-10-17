@@ -1,0 +1,13 @@
+<h2>Istoric Acțiuni</h2>
+<table>
+  <tr>
+    <th>User</th>
+    <th>Acțiune</th>
+    <th>Dată/Timp</th>
+  </tr>
+  <tr *ngFor="let log of logs">
+    <td>{{ log.username }}</td>
+    <td>{{ log.action }}</td>
+    <td>{{ log.timestamp | date:'short' }}</td>
+  </tr>
+</table>

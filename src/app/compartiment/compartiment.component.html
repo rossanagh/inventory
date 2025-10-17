@@ -1,0 +1,78 @@
+<!-- Căutare compartimente -->
+<div class="search-container">
+  <i class="fas fa-search search-icon"></i>
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (ngModelChange)="onCompartimentSearchChange()"
+    placeholder="Caută compartiment..."
+    class="search-input"
+  />
+</div>
+
+<!-- Buton Adăugare compartiment -->
+<div style="margin: 10px 0;" *ngIf="auth.isLoggedIn()">
+  <button (click)="openAddCompartimentPopup()">Adaugă compartiment</button>
+</div>
+
+<!-- POPUP Adăugare compartiment -->
+<div class="popup-backdrop" *ngIf="showAddCompartimentPopup">
+  <div class="popup">
+    <h3>Adaugă Compartiment</h3>
+
+    <label for="numeComp">Nume compartiment:</label>
+    <input
+      id="numeComp"
+      type="text"
+      [(ngModel)]="newCompartiment.nume"
+      placeholder="Introdu numele compartimentului"
+    />
+
+    <label for="fondSelect" style="margin-top:10px;">Fond asociat:</label>
+    <select
+      id="fondSelect"
+      [(ngModel)]="selectedFondIdForNew"
+    >
+      <option [ngValue]="null" disabled>— selectează fond —</option>
+      <option *ngFor="let f of fonduri" [ngValue]="f.id">{{ f.nume }}</option>
+    </select>
+
+    <div class="popup-actions">
+      <button (click)="confirmAddCompartiment()">Salvează</button>
+      <button (click)="closeAddCompartimentPopup()">Anulează</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lista compartimente -->
+<div class="compartiment-list">
+  <table>
+    <thead>
+      <tr>
+        <th>Nume Compartiment</th>
+        <th>Fond Asociat</th>
+        <th>Acțiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let compartiment of paginatedCompartimente">
+        <td>{{ compartiment.nume }}</td>
+        <td>{{ compartiment.fond?.nume }}</td>
+        <td class="compartiment-actions">
+          <button [routerLink]="['/inventar', compartiment.id]" class="details-btn">Detalii</button>
+        </td>
+      </tr>
+
+      <tr *ngIf="paginatedCompartimente.length === 0">
+        <td colspan="3" style="text-align:center; padding: 12px;">Niciun compartiment găsit.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Paginare -->
+<div style="margin-top: 10px;">
+  <button (click)="previousCompartimentPage()" [disabled]="compCurrentPage === 1">«</button>
+  Pagina {{ compCurrentPage }} din {{ compTotalPages }}
+  <button (click)="nextCompartimentPage()" [disabled]="compCurrentPage === compTotalPages">»</button>
+</div>
