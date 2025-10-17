@@ -8,7 +8,7 @@ import { Cutie } from '../cutie.model';
 })
 export class CutieService {
 
-  private apiUrl = 'http://localhost:8081/api/cutii'; // Adresa API-ului backend pentru cutii
+  private apiUrl = '${environment.apiUrl}/api/cutii'; // Adresa API-ului backend pentru cutii
 
   constructor(private http: HttpClient) {}
 

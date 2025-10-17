@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DosarService {
-  private apiUrl = 'http://localhost:8081/api/dosare';
+  private apiUrl = '${environment.apiUrl}/api/dosare';
 
   constructor(private http: HttpClient) {}
 

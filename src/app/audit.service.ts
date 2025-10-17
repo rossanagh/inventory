@@ -11,7 +11,7 @@ export interface AuditEntry {
 @Injectable({ providedIn: 'root' })
 export class AuditService {
   // >>> dacă vrei, mută în environment.ts
-  private readonly BASE_URL = 'http://localhost:8081';
+  private readonly BASE_URL = '${environment.apiUrl}';
   private readonly AUDIT_URL = `${this.BASE_URL}/api/audit/log`;
 
   constructor(private http: HttpClient) {}

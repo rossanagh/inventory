@@ -10,7 +10,7 @@ import { Fond } from '../fond.model';
   providedIn: 'root'
 })
 export class CompartimentService {
-  private apiUrl = 'http://localhost:8081/api/compartimente';
+  private apiUrl = '${environment.apiUrl}/api/compartimente';
 
   constructor(private http: HttpClient) { }
 

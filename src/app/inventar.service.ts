@@ -9,8 +9,8 @@ import { Dosar } from '../dosar.model';
 })
 export class InventarService {
 
-  private apiUrl = 'http://localhost:8081/api/inventar';
-  private apiUrl1 = 'http://localhost:8081/api/dosare';
+  private apiUrl = '${environment.apiUrl}/api/inventar';
+  private apiUrl1 = '${environment.apiUrl}/api/dosare';
 
   constructor(private http: HttpClient) {}
 

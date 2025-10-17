@@ -5,7 +5,7 @@ import { TipPastrare } from '../tip-pastrare.model';
 
 @Injectable({ providedIn: 'root' })
 export class TipPastrareService {
-  private apiUrl = 'http://localhost:8081/api/tip-pastrare';
+  private apiUrl = '${environment.apiUrl}/api/tip-pastrare';
 
   constructor(private http: HttpClient) {}
 

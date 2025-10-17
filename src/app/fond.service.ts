@@ -9,7 +9,7 @@ import { Fond } from '../fond.model';
   providedIn: 'root'
 })
 export class FondService {
-  private apiUrl = 'http://localhost:8081/api/fonduri';
+  private apiUrl = '${environment.apiUrl}/api/fonduri';
 
   constructor(private http: HttpClient) { }
 
